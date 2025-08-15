@@ -15,7 +15,8 @@ export default function RegisterPage() {
   const { login } = useUserStore();
 
   const handleRegister = async () => {
-    const response = await fetch("/api", {
+    const response = await fetch("/api/auth/register", {
+      // ✅ Исправлено
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
