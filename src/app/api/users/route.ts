@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const res = await fetch('http://localhost:3000/users', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const res = await fetch(process.env.domain + `${process.env.domain}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
 
