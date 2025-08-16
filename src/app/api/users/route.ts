@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+// import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const res = await fetch(process.env.domain + `${process.env.domain}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+// export async function POST(request: NextRequest) {
+//   const body = await request.json();
+//   const res = await fetch(process.env.domain + `${process.env.DOMAIN}/auth/login`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(body),
+//   });
 
-  const data = await res.json();
-  return NextResponse.json(data, { status: res.status });
-}
+//   const data = await res.json();
+//   return NextResponse.json(data, { status: res.status });
+// }

@@ -15,7 +15,7 @@ export default function RegisterPage() {
   const { login } = useUserStore();
 
   const handleRegister = async () => {
-    const response = await fetch("/api/auth/register", {
+    const response = await fetch(`${process.env.domain}${process.env.reg}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
