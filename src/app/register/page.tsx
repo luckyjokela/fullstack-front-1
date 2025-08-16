@@ -16,7 +16,6 @@ export default function RegisterPage() {
 
   const handleRegister = async () => {
     const response = await fetch("/api/auth/register", {
-      // ✅ Исправлено
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
