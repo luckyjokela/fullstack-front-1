@@ -55,94 +55,100 @@ export default function RegisterPage() {
             handleRegister();
           }}
         >
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
+          <div className="rounded-sm shadow-sm -space-y-px">
+            <div className="p-3">
               <label htmlFor="email-address" className="sr-only">
                 Email
               </label>
               <input
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 id="email-address"
-                name="email"
+                name="email-address"
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
-            <div>
+            <div className="p-3">
               <label htmlFor="username" className="sr-only">
                 Username
               </label>
               <input
                 onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 id="username"
                 name="username"
                 type="text"
                 autoComplete="username"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
               />
             </div>
-            <div>
+            <div className="p-3">
               <label htmlFor="name" className="sr-only">
                 Name
               </label>
               <input
                 onChange={(e) => setName(e.target.value)}
+                value={name}
                 id="name"
                 name="name"
                 type="text"
                 autoComplete="name"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Your Name"
               />
             </div>
-            <div>
+            <div className="p-3">
               <label htmlFor="surname" className="sr-only">
                 Surname
               </label>
               <input
                 onChange={(e) => setSurname(e.target.value)}
+                value={surname}
                 id="surname"
                 name="surname"
                 type="text"
                 autoComplete="surname"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Your Surname"
               />
             </div>
-            <div>
+            <div className="p-3">
               <label htmlFor="middleName" className="sr-only">
                 Middle Name
               </label>
               <input
                 onChange={(e) => setMiddleName(e.target.value)}
+                value={middleName}
                 id="middleName"
                 name="middleName"
                 type="text"
                 autoComplete="middleName"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Your Middle Name"
               />
             </div>
-            <div>
+            <div className="p-3">
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
               <input
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
                 id="password"
                 name="password"
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>

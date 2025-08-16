@@ -33,45 +33,55 @@ export default function LoginPage() {
       alert("Invalid credentials");
     }
   };
+
   return (
-    <div className="flex w-full h-full">
-      <div className="flex">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
+        <div className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Authorization
+        </div>
         <form
-          className="space-y-4"
+          className="mt-8 space-y-6"
           onSubmit={(e) => {
             e.preventDefault();
             handleLogin();
           }}
         >
-          <div>
-            <label
-              htmlFor="identifier"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email or Username
-            </label>
-            <input
-              type="text"
-              id="identifier"
-              name="identifier"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter email or username"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter your password"
-            />
+          <div className="rounded-md shadow-sm space-y-px">
+            <div className="p-3">
+              <label
+                htmlFor="identifier"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email or Username
+              </label>
+              <input
+                type="text"
+                id="identifier"
+                name="identifier"
+                onChange={(e) => setLogin(e.target.value)}
+                value={login}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Enter email or username"
+              />
+            </div>
+            <div className="p-3">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Enter your password"
+              />
+            </div>
           </div>
           <button
             type="submit"
