@@ -1,8 +1,6 @@
-import { metadata } from "./components/Metadate";
 import { UserProvider } from "./components/UserProvider";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { useUserStore } from "./store/useUserStore";
 import { NavTop } from './components/NavTop';
 
 const geistSans = Geist({

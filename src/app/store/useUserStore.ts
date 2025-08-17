@@ -9,7 +9,7 @@ interface UserState {
   hydrate: () => void;
 }
 
-export const useUserStore = create<UserState>((set, get) => ({
+export const useUserStore = create<UserState>((set) => ({
   id: null,
   email: null,
   isAuthenticated: false,
