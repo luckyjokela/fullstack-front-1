@@ -10,7 +10,7 @@ export default function LoginPage() {
   const { login: loginUser } = useUserStore();
 
   const handleLogin = async () => {
-    const response = await fetch(`${process.env.domain}${process.env.login}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_LOGIN}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ login, password }),
@@ -22,7 +22,7 @@ export default function LoginPage() {
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("refresh_token", data.refresh_token);
 
-      const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.login}`, {
+      const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROFILE}`, {
         headers: { Authorization: `Bearer ${data.access_token}` },
       });
       const profile = await profileRes.json();

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const res = await fetch(process.env.domain + `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.profile}`, {
+  const res = await fetch(process.env.domain + `${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_PROFILE}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
