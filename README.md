@@ -34,6 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
  tree /f /a > structure.txt
 ```
 
+(It's need if u wanna make u project view file, but delete node_modules in file (work only on CMD!))
+
+## Make local app with docker
+
+3 simple commands for build containers with docker
+
+```bash 
+docker-compose down
+docker-compose build --no-cache
+docker-compose up -d
+```
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

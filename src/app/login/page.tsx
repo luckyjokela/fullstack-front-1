@@ -22,7 +22,7 @@ export default function LoginPage() {
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("refresh_token", data.refresh_token);
 
-      const profileRes = await fetch(`${process.env.domain}/users/me`, {
+      const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.login}`, {
         headers: { Authorization: `Bearer ${data.access_token}` },
       });
       const profile = await profileRes.json();
