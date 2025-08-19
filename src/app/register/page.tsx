@@ -15,19 +15,23 @@ export default function RegisterPage() {
   const { login } = useUserStore();
 
   const handleRegister = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}${process.env.NEXT_PUBLIC_REG}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: crypto.randomUUID(),
-        email,
-        password,
-        username,
-        name,
-        surname,
-        middleName,
-      }),
-    });
+    console.log("SERVER_URL:", process.env.NEXT_PUBLIC_SERVER_URL);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: crypto.randomUUID(),
+          email,
+          password,
+          username,
+          name,
+          surname,
+          middleName,
+        }),
+      }
+    );
 
     const data = await response.json();
 
