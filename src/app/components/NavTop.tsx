@@ -23,6 +23,10 @@ export function NavTop() {
     router.push("/user/me");
   };
 
+  const handleChangePassword = () => {
+    router.push("/change-password");
+  };
+
   const handleLogout = () => {
     logout();
     localStorage.removeItem("access_token");
@@ -117,13 +121,26 @@ export function NavTop() {
             </li>
             {isAuthenticated ? (
               <li className="relative group">
-                <button
-                  onClick={handleProfile}
-                  className="block py-2 px-3 text-blue-700 md:p-0"
-                >
-                  Profile
-                </button>
+                <span className="block py-2 px-3 text-blue-700 md:p-0 cursor-pointer">
+                  Account
+                </span>
                 <ul className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <li>
+                    <button
+                      onClick={handleProfile}
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      My Profile
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleChangePassword}
+                      className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                    >
+                      Change Password
+                    </button>
+                  </li>
                   <li>
                     <button
                       onClick={handleLogout}
