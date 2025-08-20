@@ -14,34 +14,48 @@ export default function RegisterPage() {
   const router = useRouter();
   const { login } = useUserStore();
 
-  const handleRegister = async () => {
-    console.log("SERVER_URL:", process.env.NEXT_PUBLIC_SERVER_URL);
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: crypto.randomUUID(),
-          email,
-          password,
-          username,
-          name,
-          surname,
-          middleName,
-        }),
-      }
-    );
+const handleRegister = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: crypto.randomUUID(),
+      email,
+      password,
+      username,
+      name,
+      surname,
+      middleName,
+    }),
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (data.success) {
-      login(data.data.id, data.data.email);
-      router.push("/");
-    } else {
-      alert(data.error);
+  if (data.success) {
+    const loginRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ login: email, password }),
+    });
+
+    const loginData = await loginRes.json();
+
+    if (loginData.access_token) {
+      localStorage.setItem("access_token", loginData.access_token);
+      localStorage.setItem("refresh_token", loginData.refresh_token);
+
+      const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
+        headers: { Authorization: `Bearer ${loginData.access_token}` },
+      });
+      const profile = await profileRes.json();
+
+      login(profile.id, profile.email, profile.username);
+      router.push("/user/me");
     }
-  };
+  } else {
+    alert(data.error);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

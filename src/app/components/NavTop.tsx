@@ -19,6 +19,10 @@ export function NavTop() {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleProfile = () => {
+    router.push("/user/me");
+  };
+
   const handleLogout = () => {
     logout();
     localStorage.removeItem("access_token");
@@ -69,7 +73,10 @@ export function NavTop() {
           </svg>
         </button>
 
-        <div className={`${isOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`} id="navbar-default">
+        <div
+          className={`${isOpen ? "block" : "hidden"} w-full md:block md:w-auto`}
+          id="navbar-default"
+        >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <Link
@@ -108,7 +115,26 @@ export function NavTop() {
                 Contact
               </Link>
             </li>
-            {!isAuthenticated ? (
+            {isAuthenticated ? (
+              <li className="relative group">
+                <button
+                  onClick={handleProfile}
+                  className="block py-2 px-3 text-blue-700 md:p-0"
+                >
+                  Profile
+                </button>
+                <ul className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            ) : (
               <>
                 <li>
                   <Link
@@ -135,15 +161,6 @@ export function NavTop() {
                   </Link>
                 </li>
               </>
-            ) : (
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="block py-2 px-3 text-red-600 hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-red-500 dark:hover:bg-gray-700"
-                >
-                  Logout
-                </button>
-              </li>
             )}
           </ul>
         </div>
