@@ -23,7 +23,10 @@ export const useUserStore = create<UserState>((set) => ({
   },
 
   logout: () => {
+    fetch('/auth/logout', { method: 'POST' });
+    
     localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
     set({ id: null, email: null, isAuthenticated: false });
   },
 
@@ -44,10 +47,14 @@ export const useUserStore = create<UserState>((set) => ({
   }) => {
     set((state) => {
       const updated = { ...state, ...data };
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ id: state.id, email: data.email || state.email })
-      );
+      localStorage.setItem("user", JSON.stringify({
+        id: state.id,
+        email: data.email || state.email,
+        username: data.username || state.username,
+        name: data.name,
+        middleName: data.middleName,
+        surname: data.surname,
+      }));
       return updated;
     });
   },

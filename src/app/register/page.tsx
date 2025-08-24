@@ -27,6 +27,7 @@ const handleRegister = async () => {
       surname,
       middleName,
     }),
+    credentials: 'include',
   });
 
   const data = await response.json();
@@ -36,6 +37,7 @@ const handleRegister = async () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ login: email, password }),
+      credentials: 'include',
     });
 
     const loginData = await loginRes.json();
@@ -45,6 +47,7 @@ const handleRegister = async () => {
       localStorage.setItem("refresh_token", loginData.refresh_token);
 
       const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
+        credentials: 'include',
         headers: { Authorization: `Bearer ${loginData.access_token}` },
       });
       const profile = await profileRes.json();
