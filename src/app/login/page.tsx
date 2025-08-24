@@ -20,9 +20,6 @@ const handleLogin = async () => {
   const data = await response.json();
 
   if (data.access_token) {
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("refresh_token", data.refresh_token);
-
     const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
       headers: { Authorization: `Bearer ${data.access_token}` },
       credentials: 'include',
