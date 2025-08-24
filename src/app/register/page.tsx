@@ -32,7 +32,7 @@ const handleRegister = async () => {
 
   const data = await response.json();
 
-  if (data.success) {
+  if (response.ok && data.success) {
     const loginRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -43,12 +43,8 @@ const handleRegister = async () => {
     const loginData = await loginRes.json();
 
     if (loginData.access_token) {
-      localStorage.setItem("access_token", loginData.access_token);
-      localStorage.setItem("refresh_token", loginData.refresh_token);
-
       const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
         credentials: 'include',
-        headers: { Authorization: `Bearer ${loginData.access_token}` },
       });
       const profile = await profileRes.json();
 
@@ -56,7 +52,8 @@ const handleRegister = async () => {
       router.push("/user/me");
     }
   } else {
-    alert(data.error);
+    const errorMsg = data.error || data.message || 'Registration failed';
+    alert(errorMsg);
   }
 };
 

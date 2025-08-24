@@ -29,7 +29,8 @@ const handleLogin = async () => {
     loginUser(profile.id, profile.email, profile.username);
     router.push("/user/me");
   } else {
-    alert("Invalid credentials");
+    const errorMsg = data.error || data.message || 'Authorization failed';
+    alert(errorMsg);
   }
 };
 
