@@ -14,48 +14,58 @@ export default function RegisterPage() {
   const router = useRouter();
   const { login } = useUserStore();
 
-const handleRegister = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      id: crypto.randomUUID(),
-      email,
-      password,
-      username,
-      name,
-      surname,
-      middleName,
-    }),
-    credentials: 'include',
-  });
+  const handleRegister = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/register`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: crypto.randomUUID(),
+          email,
+          password,
+          username,
+          name,
+          surname,
+          middleName,
+        }),
+        credentials: "include",
+      }
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (response.ok && data.success) {
-    const loginRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ login: email, password }),
-      credentials: 'include',
-    });
+    if (response.ok && data.success) {
+      const loginRes = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ login: email, password }),
+          credentials: "include",
+        }
+      );
 
-    const loginData = await loginRes.json();
+      const loginData = await loginRes.json();
 
-    if (loginData.access_token) {
-      const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
-        credentials: 'include',
-      });
-      const profile = await profileRes.json();
+      if (loginData.access_token) {
+        const profileRes = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const profile = await profileRes.json();
 
-      login(profile.id, profile.email, profile.username);
-      router.push("/user/me");
+        login(profile.id, profile.email, profile.username);
+        router.push("/user/me");
+      }
+    } else {
+      const errorMsg = data.error || data.message || "Registration failed";
+      alert(errorMsg);
     }
-  } else {
-    const errorMsg = data.error || data.message || 'Registration failed';
-    alert(errorMsg);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
