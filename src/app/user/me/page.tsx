@@ -65,7 +65,7 @@ export default function ProfilePage() {
     const token = localStorage.getItem("access_token");
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/users`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user`,
       {
         method: "PATCH",
         headers: {
