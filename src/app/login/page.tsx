@@ -21,7 +21,6 @@ const handleLogin = async () => {
 
   if (data.access_token) {
     const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
-      headers: { Authorization: `Bearer ${data.access_token}` },
       credentials: 'include',
     });
     const profile = await profileRes.json();

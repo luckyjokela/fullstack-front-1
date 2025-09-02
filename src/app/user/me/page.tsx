@@ -20,8 +20,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token || !isAuthenticated) {
+    if (!isAuthenticated) {
       router.push("/login");
       return;
     }
@@ -31,9 +30,7 @@ export default function ProfilePage() {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            credentials: 'include',
           }
         );
 
@@ -62,22 +59,15 @@ export default function ProfilePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    const token = localStorage.getItem("access_token");
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/user`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          id,
-          ...form,
-        }),
-      }
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, ...form }),
+      credentials: "include",
+    });
 
     const data = await response.json();
 
@@ -167,10 +157,10 @@ export default function ProfilePage() {
         </div>
         <button
           type="submit"
-          disabled={loading}
+          disabled={submitting}
           className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-400"
         >
-          {loading ? "Сохранение..." : "Сохранить"}
+          {submitting ? "Сохранение..." : "Сохранить"}
         </button>
       </form>
     </div>

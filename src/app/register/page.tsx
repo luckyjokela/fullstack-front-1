@@ -49,17 +49,28 @@ export default function RegisterPage() {
       const loginData = await loginRes.json();
 
       if (loginData.access_token) {
-        const profileRes = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
-        const profile = await profileRes.json();
+        try {
+          const profileRes = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
+            {
+              method: "GET",
+              credentials: "include",
+            }
+          );
 
-        login(profile.id, profile.email, profile.username);
-        router.push("/user/me");
+          if (!profileRes.ok) throw new Error("Profile fetch failed");
+
+          const profile = await profileRes.json();
+          login(profile.id, profile.email, profile.username);
+          router.push("/user/me");
+        } catch (error) {
+          let message = "Unknown error";
+          if (error instanceof Error) {
+            message = error.message;
+          }
+          alert("Failed to load profile: " + message);
+          console.error(error);
+        }
       }
     } else {
       const errorMsg = data.error || data.message || "Registration failed";
