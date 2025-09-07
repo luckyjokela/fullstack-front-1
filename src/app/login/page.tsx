@@ -9,29 +9,35 @@ export default function LoginPage() {
   const router = useRouter();
   const { login: loginUser } = useUserStore();
 
-const handleLogin = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ login, password }),
-    credentials: 'include',
-  });
+  const handleLogin = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ login, password }),
+        credentials: "include",
+      }
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (data.access_token) {
-    const profileRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, {
-      credentials: 'include',
-    });
-    const profile = await profileRes.json();
+    if (data.access_token) {
+      const profileRes = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`,
+        {
+          credentials: "include",
+        }
+      );
+      const profile = await profileRes.json();
 
-    loginUser(profile.id, profile.email, profile.username);
-    router.push("/user/me");
-  } else {
-    const errorMsg = data.error || data.message || 'Authorization failed';
-    alert(errorMsg);
-  }
-};
+      loginUser(profile.id, profile.email, profile.username);
+      router.push("/user/me");
+    } else {
+      const errorMsg = data.error || data.message || "Authorization failed";
+      alert(errorMsg);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
