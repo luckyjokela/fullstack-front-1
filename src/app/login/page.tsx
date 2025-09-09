@@ -32,7 +32,11 @@ export default function LoginPage() {
       const profile = await profileRes.json();
 
       loginUser(profile.id, profile.email, profile.username);
-      router.push("/user/me");
+      if (profile.role === "admin") {
+        router.push("/user/admin");
+      } else {
+        router.push("/user/me");
+      }
     } else {
       const errorMsg = data.error || data.message || "Authorization failed";
       alert(errorMsg);
