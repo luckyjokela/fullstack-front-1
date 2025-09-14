@@ -18,7 +18,7 @@ export default function Error({
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
       <Image
-        src="/images/server-error.svg"
+        src="/server-error.png"
         alt="Server Error"
         width={300}
         height={300}
